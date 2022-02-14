@@ -42,4 +42,12 @@ person:
 #  web:
 #    resources:
 #      static-locations: classpath:/haha/
-
+spring:
+  web:
+    resources:
+#      add-mappings: false   # 禁用静态资源
+      add-mappings: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

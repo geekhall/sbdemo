@@ -142,6 +142,23 @@ Spring Boot 的默认静态资源目录在类路径（resources）目录下的�
     │   └── 4.png
     └── ...
 ```
+源码：
+
+WebProperties.java:
+
+```java
+public static class Resources {
+
+private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {"classpath:/META-INF/resources/",
+        "classpath:/resources/", "classpath:/static/", "classpath:/public/"};
+/**
+ * Locations of static resources. Defaults to classpath:[/META-INF/resources/,
+ * /resources/, /static/, /public/].
+ */
+private String[] staticLocations = CLASSPATH_RESOURCE_LOCATIONS;
+}
+```
+
 
 使用 `SpringMVC` 的 `ResourceHttpRequestHandler`来处理。
 
@@ -181,4 +198,70 @@ spring:
 spring:
   resources:
     static-locations: [classpath:/haha/]
+```
+
+### 资源加载相关源码解析
+
+主要由 `WebMvcAutoConfigurationAdapter` 类来实现，其构造函数中使用了下面类作为参数：
+* WebMvcProperties==spring.mvc(配置文件的相关属性和XXX进行了绑定)
+* ResourceProperties==spring.resources(配置文件的相关属性和XXX进行了绑定)
+* ListableBeanFactory (bean factory)
+* HttpMessageConverters  (找到所有的HttpMessageConverters)
+* ResourceHandlerRegistrationCustomizer  （资源处理器的自定义器）
+* DispatcherServletPath
+* ServletRegistrationBean    (给应用注册Servlet，Filter)
+
+资源加载相关处理主要由 `addResourceHandlers` 方法来处理的
+
+使用下面方式禁用静态资源：
+```yaml
+spring:
+  web:
+    resources:
+      add-mappings: false
+```
+
+原因：
+
+```java
+public void addResourceHandlers(ResourceHandlerRegistry registry){
+    if(!this.resourceProperties.isAddMappings()){
+        logger.debug("Default resource handling disabled");
+        return;
+    }
+}
+```
+
+
+### 表单使用REST风格
+
+打开隐藏method配置：
+
+```yaml
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+```
+1. 表单提交上来会带上 `_method=PUT`
+2. 请求过来被 `HiddenHttpMethodFilter` 拦截
+3. 获取 `_method` 的值作为真正的请求方式
+
+
+### RequestMapping原理
+
+1. 所有请求都会经过 `DispatcherServlet` 类
+
+DispatcherServlet的继承树：
+
+```txt
+Object (java.lang)
+  GenericServlet (javax.servlet)
+    HttpServlet (javax.servlet.http)
+      HttpServletBean (org.springframework.web.servlet)
+        FrameworkServlet (org.springframework.web.servlet)
+          DispatcherServlet (org.springframework.web.servlet)
+            TestDispatcherServlet (org.springframework.test.web.servlet)
+
 ```

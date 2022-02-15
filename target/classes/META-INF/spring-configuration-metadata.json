@@ -9,6 +9,12 @@
       "name": "person",
       "type": "cn.geekhall.sbdemo.bean.Person",
       "sourceType": "cn.geekhall.sbdemo.bean.Person"
+    },
+    {
+      "name": "spring.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "cn.geekhall.sbdemo.config.MyDataSourceConfig",
+      "sourceMethod": "dataSource()"
     }
   ],
   "properties": [

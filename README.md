@@ -265,3 +265,35 @@ Object (java.lang)
             TestDispatcherServlet (org.springframework.test.web.servlet)
 
 ```
+
+
+
+## 数据操作
+
+### 导入依赖
+
+导入启动依赖：
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jdbc</artifactId>
+</dependency>
+```
+
+导入JDBC驱动
+
+spring-data 官方仲裁的默认版本是8.0.28，如果使用5.x版本有两种方法：
+1. 可以在项目pom文件中直接指定版本。（maven的就近依赖原则）
+2. 使用`properties`重新声明`<mysql.version>`指定版本。（maven的属性的就近优先原则）
+```xml
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+</dependency>
+
+```
+
+
+
+

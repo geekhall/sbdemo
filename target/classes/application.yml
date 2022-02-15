@@ -51,3 +51,14 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3316/db_yeb
+    username: yeb
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    type: com.zaxxer.hikari.HikariDataSource
+  jdbc:
+    template:
+      query-timeout: 3
+
+

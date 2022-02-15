@@ -12,9 +12,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class SbdemoApplication {
 
-	public static void main(String[] args) {
-		// 1. 返回我们的IoC容器
-		ConfigurableApplicationContext context = SpringApplication.run(SbdemoApplication.class, args);
+	public static void testContainer(ConfigurableApplicationContext context){
+
 
 		// 2. 查看容器里面的组件
 		String[] names = context.getBeanDefinitionNames();
@@ -60,6 +59,15 @@ public class SbdemoApplication {
 		System.out.println("============ Person ============");
 
 		System.out.println("============ Person ============");
+	}
+
+	public static void dataSourceTest(ConfigurableApplicationContext context){
+
+	}
+	public static void main(String[] args) {
+		// 1. 返回我们的IoC容器
+		ConfigurableApplicationContext context = SpringApplication.run(SbdemoApplication.class, args);
+		dataSourceTest(context);
 	}
 
 }

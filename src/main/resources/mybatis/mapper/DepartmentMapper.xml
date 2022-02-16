@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geekhall.sbdemo.mapper.DepartmentMapper">
+    <select id="getDept" resultType="cn.geekhall.sbdemo.bean.Department">
+        select * from t_department where id=#{id}
+    </select>
+</mapper>

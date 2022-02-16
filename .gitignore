@@ -12,6 +12,7 @@
 .mtj.tmp/
 
 # idea config file
+sbdemo.iml
 .idea/
 target/
 

@@ -57,8 +57,44 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    type: com.zaxxer.hikari.HikariDataSource
+    # 以下为整合Druid数据源配置，使用druid-spring-boot-starter
+    druid:
+      stat-view-servlet:      # Web监控页面 http://localhost:8888/druid/
+        enabled: true
+        login-username: admin
+        login-password: admin
+        reset-enable: true
+#      web-stat:
+#        enabled: true
+#        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+#        url-patterns: /*
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      aop-patterns: cn.geekhall.sbdemo  # Spring 监控 AOP 切入点，监控SpringBean 。如 x.y.z.service.*， 配置多个英文逗号分隔。
+      filters: stat, wall
+
+      filter:
+        stat:
+          slow-sql-millis: 1000
+          log-slow-sql: true
+        wall:
+          enabled: true
+          db-type: mysql
+          config:
+            drop-table-allow: false
+
+
+
+
+
   jdbc:
     template:
       query-timeout: 3
 
-
+mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml # 不使用mybatis-config.xml中的内容，打开会报错。
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

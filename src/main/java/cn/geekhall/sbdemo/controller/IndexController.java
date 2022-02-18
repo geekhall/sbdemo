@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * IndexController
@@ -42,6 +39,8 @@ public class IndexController {
         return departmentService.getDepartmentById(id);
     }
 
+    @ResponseBody
+    @PostMapping("/role")
     public Role saveRole(Role role) {
         roleService.saveRole(role);
         return role;

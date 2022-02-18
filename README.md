@@ -299,9 +299,22 @@ spring-data 官方仲裁的默认版本是8.0.28，如果使用5.x版本有两�
 
 ## 配置Mybatis
 * 导入mybatis官方starter
+* 在application.yaml中指定Mapper配置文件的位置，以及指定全局配置文件的信息
 * 编写mapper接口。标准`@Mapper`注解
 * 编写sql映射文件并绑定mapper接口
-* 在application.yaml中指定Mapper配置文件的位置，以及指定全局配置文件的信息
+
+
+## 配置Mybatis-plus
+
+自动配置：
+
+* `MybatisPlusAutoConfiguration`配置类，`MybatisPlusProperties`配置项绑定。
+* `sqlSessionFactory`自动配置好的。
+* `mapperLocations`自动配置好的，有默认值。classpath:*:/mapper/**/*.xml; 
+  任意包的类路径下的所有`mapper`文件夹下任意路径下的所有xml都是sql映射文件。
+* 容器中也自动配置了`sqlSessionTemplate`
+* `@Mapper`标注的接口也会被自动扫描;建议使用`@MapperScan`注解自动扫描。
+
 
 
 

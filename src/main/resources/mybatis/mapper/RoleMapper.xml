@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.geekhall.sbdemo.mapper.RoleMapper">
-    <insert id="insert">
-        insert into t_role (`code`, `name`, `gmt_create`, `enabled`, `remark`) values (#{code}, #{name}, #{gmtCreate}, #{enabled}, #{remark})
-    </insert>
+<!--    <insert id="insert" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into t_role (`code`, `name`, `gmt_create`, `enabled`, `remark`) values (#{code}, #{name}, #{gmtCreate}, #{enabled}, #{remark})-->
+<!--    </insert>-->
 </mapper>

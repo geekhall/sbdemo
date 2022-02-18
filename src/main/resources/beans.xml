@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id="user01" class="cn.geekhall.sbdemo.bean.User">
+    <bean id="user01" class="cn.geekhall.sbdemo.bean.TestUser">
         <property name="name" value="张三"></property>
         <property name="age" value="18"></property>
     </bean>
@@ -14,11 +14,11 @@
         <property name="name" value="tom"></property>
     </bean>
 
-    <bean id="haha" class="cn.geekhall.sbdemo.bean.User">
+    <bean id="haha" class="cn.geekhall.sbdemo.bean.TestUser">
         <property name="name" value="haha"></property>
     </bean>
 
-    <bean id="hehe" class="cn.geekhall.sbdemo.bean.User">
+    <bean id="hehe" class="cn.geekhall.sbdemo.bean.TestUser">
         <property name="name" value="hehe"></property>
     </bean>
 

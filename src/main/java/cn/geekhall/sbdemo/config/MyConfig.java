@@ -2,8 +2,7 @@ package cn.geekhall.sbdemo.config;
 
 import cn.geekhall.sbdemo.bean.Car;
 import cn.geekhall.sbdemo.bean.Pet;
-import cn.geekhall.sbdemo.bean.User;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
+import cn.geekhall.sbdemo.bean.TestUser;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,8 +35,8 @@ public class MyConfig {
      * @return
      */
     @Bean
-    public User user02() {
-        User zhangsan = new User("user02", 20);
+    public TestUser user02() {
+        TestUser zhangsan = new TestUser("user02", 20);
         zhangsan.setPet(jerryPet());
         return zhangsan;
     }

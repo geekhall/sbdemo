@@ -1,10 +1,8 @@
 package cn.geekhall.sbdemo;
 
-import cn.geekhall.sbdemo.bean.Person;
 import cn.geekhall.sbdemo.bean.Pet;
-import cn.geekhall.sbdemo.bean.User;
+import cn.geekhall.sbdemo.bean.TestUser;
 import cn.geekhall.sbdemo.config.MyConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -36,12 +34,12 @@ public class SbdemoApplication {
 		System.out.println(configBean);
 		System.out.println("=====================");
 
-		User user01 = configBean.user02();
-		User user02 = configBean.user02();
+		TestUser user01 = configBean.user02();
+		TestUser user02 = configBean.user02();
 		System.out.println(user01 == user02); // 当 @Configuration(proxyBeanMethods = true) 时，保持组件单实例。返回true
 		System.out.println(user01 == user02); // 当 @Configuration(proxyBeanMethods = false) 时，不保持组件单实例。返回false
 
-		User user021 = context.getBean("user02", User.class); // 这里的getBean方法的第一个参数为Config配置类中的方法名。
+		TestUser user021 = context.getBean("user02", TestUser.class); // 这里的getBean方法的第一个参数为Config配置类中的方法名。
 		Pet jerryPet = context.getBean("jerryPet", Pet.class);
 		System.out.println("===========1==========");
 		System.out.println(user021.getPet() == jerryPet);

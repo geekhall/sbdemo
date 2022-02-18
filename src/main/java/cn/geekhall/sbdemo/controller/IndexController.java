@@ -2,8 +2,8 @@ package cn.geekhall.sbdemo.controller;
 
 import cn.geekhall.sbdemo.bean.Department;
 import cn.geekhall.sbdemo.bean.Role;
-import cn.geekhall.sbdemo.service.DepartmentService;
-import cn.geekhall.sbdemo.service.RoleService;
+import cn.geekhall.sbdemo.service.impl.DepartmentServiceImpl;
+import cn.geekhall.sbdemo.service.impl.RoleServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,15 +23,15 @@ public class IndexController {
     JdbcTemplate jdbcTemplate;
 
     @Autowired
-    DepartmentService departmentService;
+    DepartmentServiceImpl departmentService;
 
     @Autowired
-    RoleService roleService;
+    RoleServiceImpl roleServiceImpl;
 
     @ResponseBody
     @GetMapping("/role")
     public Role getRoleById(@RequestParam("id") Long id){
-        return roleService.getById(id);
+        return roleServiceImpl.getById(id);
     }
     @ResponseBody
     @GetMapping("/de partment")
@@ -42,7 +42,7 @@ public class IndexController {
     @ResponseBody
     @PostMapping("/role")
     public Role saveRole(Role role) {
-        roleService.saveRole(role);
+        roleServiceImpl.saveRole(role);
         return role;
     }
 //    @RequestBody

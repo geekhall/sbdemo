@@ -1,5 +1,7 @@
 package cn.geekhall.sbdemo.mapper;
 
+import cn.geekhall.sbdemo.bean.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -7,6 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  *
  * @author yiny
  */
-@Mapper
-public class UserMapper {
+//@Mapper
+public interface UserMapper extends BaseMapper<User> {
 }

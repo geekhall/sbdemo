@@ -1,5 +1,7 @@
 package cn.geekhall.sbdemo;
 
+import cn.geekhall.sbdemo.bean.User;
+import cn.geekhall.sbdemo.mapper.UserMapper;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,9 @@ class SbdemoApplicationTests {
 	@Autowired
 	DataSource dataSource;
 
+	@Autowired
+	UserMapper userMapper;
+
 	@Test
 	void contextLoads() {
 //		jdbcTemplate.queryForList("select * from t_department");
@@ -26,6 +31,12 @@ class SbdemoApplicationTests {
 		System.out.println("Count: " + count);
 
 		System.out.println("数据源类型：" + dataSource.getClass());
+	}
+
+	@Test
+	void testUserMapper() {
+		User user = userMapper.selectById(1L);
+		System.out.println("User: "+ user);
 	}
 
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * TableController
@@ -18,7 +19,7 @@ public class TableController {
     UserService userService;
 
     @GetMapping("/basic_table")
-    public String basic_table(int a){
+    public String basic_table(@RequestParam("a") int a){
         int i = 10/0;
         return "table/basic_table";
     }

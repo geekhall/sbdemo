@@ -15,7 +15,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user_tbl")
+@TableName("t_user")  // 不加表明默认去找user表
 public class User {
 
     // MybatisPlus要求所有属性都应该在数据库中，若不存在需要使用@TableField注解标注。

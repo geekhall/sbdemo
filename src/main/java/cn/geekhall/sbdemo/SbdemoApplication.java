@@ -3,10 +3,12 @@ package cn.geekhall.sbdemo;
 import cn.geekhall.sbdemo.bean.Pet;
 import cn.geekhall.sbdemo.bean.TestUser;
 import cn.geekhall.sbdemo.config.MyConfig;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+@MapperScan("cn.geekhall.sbdemo.mapper")
 @SpringBootApplication
 public class SbdemoApplication {
 

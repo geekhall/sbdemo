@@ -316,5 +316,33 @@ spring-data 官方仲裁的默认版本是8.0.28，如果使用5.x版本有两�
 * `@Mapper`标注的接口也会被自动扫描;建议使用`@MapperScan`注解自动扫描。
 
 
+## 整合配置Redis
 
+添加依赖
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
+
+* RedisAutoConfiguration: Redis 的自动配置类，使用`"spring.redis.xxx"`进行配置
+* 连接工厂是准备好的：LettuceConnectionConfiguration、JedisConnectionConfiguration。
+* 容器中自动注入了RedisTemplate<Object, Object> 和SpringRedisTemplate
+
+配置：
+
+```yaml
+spring:
+  redis:
+#    url: redis://127.0.0.1:6379
+    host: 127.0.0.1
+    port: 6379
+    client-type: lettuce  # or jedis
+    lettuce:
+      pool:
+        max-active: 10
+        min-idle: 4
+        
+```
 

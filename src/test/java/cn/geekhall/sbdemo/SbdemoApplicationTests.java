@@ -2,11 +2,12 @@ package cn.geekhall.sbdemo;
 
 import cn.geekhall.sbdemo.bean.User;
 import cn.geekhall.sbdemo.mapper.UserMapper;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -38,5 +39,18 @@ class SbdemoApplicationTests {
 		User user = userMapper.selectById(1L);
 		System.out.println("User: "+ user);
 	}
+
+	@Autowired
+	StringRedisTemplate redisTemplate;
+
+	@Test
+	public void testRedis(){
+		ValueOperations<String, String> operations = redisTemplate.opsForValue();
+		operations.set("Hello", "RedisTest");
+
+		String hello = operations.get("Hello");
+		System.out.println(hello);
+	}
+
 
 }

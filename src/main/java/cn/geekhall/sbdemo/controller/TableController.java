@@ -37,4 +37,10 @@ public class TableController {
         return "table/dynamic_table";
 //        return use rs;
     }
+
+    @GetMapping("/user/delete")
+    public String deleteUser(@RequestParam("id") Long id){
+        userService.removeById(id);
+        return "redirect:/";
+    }
 }

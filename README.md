@@ -497,3 +497,33 @@ java -jar spring-boot-demo.jar --spring.profiles.active=prod --person.name=haha
 private String mavenHome;
 
 ```
+
+### 配置文件查找位置（下面覆盖上面的）
+
+1. classpath 根路径 
+2. classpath 根路径下config目录
+3. jar包当前目录
+4. jar包当前目录的config目录
+5. /config子目录的直接子目录
+
+
+### 配置文件加载顺序（下面覆盖上面的）
+
+1. 当前jar包内部的application.properties和application.yml
+2. 当前jar包内部的application-{profile}.properties和application-{profile}.yml
+3. 引用的外部jar包的application.properties和application.yml
+4. 引用的外部jar包的application-{profile}.properties和application-{profile}.yml
+
+## 自定义Starter
+
+### 1. Starter 启动原理
+
+* starter-pom引入 autoconfigure包 -> 引入SpringBootStarter
+* autoconfigure包中配置使用META-INF/spring.factories中EnableAutoConfiguration的值，使得项目启动加载指定的自动配置类。
+* 编写自动配置类xxxAutoConfiguration -> xxxProperties
+  - @Configuration
+  - @Confitional
+  - @EnableConfigurationProperties
+  - @Bean
+  - ...
+* 引入Starter --- xxxAutoConfiguration --- 容器中放入组件 --- 绑定xxxProperties  --- 配置项

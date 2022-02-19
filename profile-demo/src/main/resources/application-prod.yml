@@ -3,3 +3,4 @@ server:
 
 person:
   name: PROD-??
+  age: 18

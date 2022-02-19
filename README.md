@@ -485,3 +485,15 @@ java -jar spring-boot-demo.jar --spring.profiles.active=prod --person.name=haha
 ```
 
 环境配置文件中的配置信息会覆盖默认配置文件中的内容。
+
+
+
+## 一些细节
+
+### 获取环境变量
+
+```
+@value(${MAVEN_HOME})
+private String mavenHome;
+
+```

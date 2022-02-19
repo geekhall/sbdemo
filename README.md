@@ -36,7 +36,7 @@ SpringBoot2中使用父项目定义好的各个常用软件jar包的版本，自
 
 方式1：
 
-```java
+```
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "cn.geekhall")
@@ -62,7 +62,7 @@ public class MainApplication{
 ### @Configuration(proxyBeanMethods = true) 
 SpringBoot2 中的 `@Configuration` 注解增加了proxyBeanMethods参数：
 
-```java
+```
 @Configuration(proxyBeanMethods = true)
 ```
 
@@ -92,7 +92,7 @@ SpringBoot2 中的 `@Configuration` 注解增加了proxyBeanMethods参数：
 
 注意这个bean同时还需要使用 `@Component` 放到Spring容器中才可以。
 
-```java
+```
 @Component
 @ConfigurationProperties(prefix = "mycar")
 class Car {
@@ -107,7 +107,7 @@ class Car {
 
 `@SpringBootApplication` 注解相当于使用了：
 
-```java
+```
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan("cn.geekhall")
@@ -223,7 +223,7 @@ spring:
 
 原因：
 
-```java
+```
 public void addResourceHandlers(ResourceHandlerRegistry registry){
     if(!this.resourceProperties.isAddMappings()){
         logger.debug("Default resource handling disabled");
@@ -345,4 +345,55 @@ spring:
         min-idle: 4
         
 ```
+
+## JUnit5
+Spring 2.4 开始将JUnit默认升级到了JUnit5，单元测试更加方便了：
+1. 编写测试方法，加上`@Test`注解（注意需要使用JUnit5版本的注解）
+2. JUnit类具有Spring的功能，`@Autowired` 自动装配，比如`@Transactional`标注测试方法，测试完成后自动回滚。
+
+### Junit5常用注解
+```java
+public class Test{
+      
+  @ParameterizedTest  // 表示方法是参数化测试
+  @RepeatedTest       // 表示方法可重复执行
+  @DisplayName        // 为测试类或者测试方法展示名称
+  @BeforeEach         // 表示在每个单元测试之前执行
+  @AfterEach          // 表示在每个单元测试之后执行
+  @BeforeAll          // 表示在所有单元测试之前执行
+  @AfterAll           // 表示在所有单元测试之后执行
+  @Tag                // 表示单元测试类别，类似JUnit4中的@Categories
+  @Disabled           // 表示测试类或者测试方法不执行，类似JUnit4中的@Ignore
+  @Timeout            // 表示测试方法如果超过了指定时间将会返回错误
+  @ExtendWith         // 为测试类或者测试方法提供扩展类引用
+  public void test(){
+    // something.
+  }
+}
+```
+
+
+## SpringBoot Actuator 指标监控功能
+
+每个SpringBoot微服务在云上部署以后，我们都需要对其进行监控、追踪、审计、控制等。
+SpringBoot就抽取了Actuator场景，获得生产级别的应用监控、审计等功能。
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+```
+
+### 使用
+
+访问  [http://localhost:8888/actuator/**](http://localhost:8888/actuator/**)
+
+
+### 常用Endpoint
+
+* Health: 监控状况
+* Metrics： 运行时指标
+* Loggers： 日志
 

@@ -105,3 +105,24 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+# http://localhost:8888/actuator/
+management:
+  endpoints:
+    enabled-by-default: false  # 默认开启所有监控端点
+    web:
+      exposure:
+        include: '*'    # 以Web方式暴露所有监控端点。
+
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    info:
+      enabled: true
+
+    beans:
+      enabled: true
+
+    metrics:
+      enabled: true

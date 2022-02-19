@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  *
  * @author yiny
  */
-//@Mapper
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 }

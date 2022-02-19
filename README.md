@@ -466,3 +466,22 @@ boot:
 
 然后同时启动客户端应用和监控服务。
 
+## Spring Boot 原理解析
+
+### Profile功能
+为了方便多环境适配，springboot简化了profile功能
+
+* 配置文件方式激活：在默认配置文件中指定哪个环境配置文件生效
+```yaml
+
+# 激活哪个环境
+spring:
+  profiles:
+    active: prod
+```
+* java命令行方式激活，作为启动时的参数
+```shell
+java -jar spring-boot-demo.jar --spring.profiles.active=prod --person.name=haha
+```
+
+环境配置文件中的配置信息会覆盖默认配置文件中的内容。

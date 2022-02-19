@@ -1,0 +1,7 @@
+server:
+  port: 8889
+
+# 激活哪个环境
+spring:
+  profiles:
+    active: prod

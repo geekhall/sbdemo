@@ -1,0 +1,6 @@
+server:
+  port: 8889
+
+
+person:
+  name: SIT-张三

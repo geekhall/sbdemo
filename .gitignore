@@ -15,6 +15,7 @@
 sbdemo.iml
 .idea/
 target/
+.mvn/
 
 
 # Package Files #

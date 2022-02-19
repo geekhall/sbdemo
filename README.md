@@ -373,10 +373,12 @@ public class Test{
 ```
 
 
-## SpringBoot Actuator 指标监控功能
+## SpringBoot Actuator 指标监控功能及Endpoint机制
 
 每个SpringBoot微服务在云上部署以后，我们都需要对其进行监控、追踪、审计、控制等。
 SpringBoot就抽取了Actuator场景，获得生产级别的应用监控、审计等功能。
+
+可以用来实现微服务监控服务器功能
 
 ```xml
 <dependency>
@@ -396,4 +398,71 @@ SpringBoot就抽取了Actuator场景，获得生产级别的应用监控、审�
 * Health: 监控状况
 * Metrics： 运行时指标
 * Loggers： 日志
+
+### 定制Health
+
+### 自定义Info
+### 自定义Metrics
+
+### 自定义Endpoint
+```java
+@Component
+@Endpoint(id = "myservice")
+public class MyServiceEndPoint {
+
+    @ReadOperation
+    public Map getDockerInfo(){
+        return Collections.singletonMap("dockerInfo", "docker started...");
+    }
+
+    @WriteOperation
+    public void stopDocker(){
+        System.out.println("docker stopped...");
+    }
+}
+```
+然后访问：[http://localhost:8888/actuator/myservice](http://localhost:8888/actuator/myservice) 就可以看到返回信息了。
+
+在JMX（jconsole）中也可以看到。
+
+
+## 开启BootAdminServer服务监控
+
+### 新建SpringBootAdmin项目
+新建一个SpringBootWeb项目，添加spring-boot-admin-starter-server依赖
+```xml
+<dependency>
+  <groupId>de.codecentric</groupId>
+  <artifactId>spring-boot-admin-starter-server</artifactId>
+  <version>2.6.2</version>
+</dependency>
+```
+
+在启动类上添加 `@EnableAdminServer` 注解
+然后启动后就可以看到SpringBootAdmin的监控页面了。
+
+### 被监控项目配置
+
+添加客户端依赖
+```xml
+<dependency>
+    <groupId>de.codecentric</groupId>
+    <artifactId>spring-boot-admin-starter-client</artifactId>
+    <version>2.6.2</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+配置客户端项目的监控URL：
+```yaml
+boot:
+    admin:
+      client:
+        url: http://localhost:8899
+```
+
+然后同时启动客户端应用和监控服务。
 

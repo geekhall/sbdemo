@@ -97,8 +97,14 @@ spring:
       pool:
         max-active: 10
         min-idle: 4
-
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:8899
+#        instance:
+#          prefer-ip: true  # 过时
+  application:
+    name: sbdemo
 
 mybatis:
 #  config-location: classpath:mybatis/mybatis-config.xml # 不使用mybatis-config.xml中的内容，打开会报错。
@@ -109,7 +115,7 @@ mybatis:
 # http://localhost:8888/actuator/
 management:
   endpoints:
-    enabled-by-default: false  # 默认开启所有监控端点
+    enabled-by-default: true  # 默认开启所有监控端点
     web:
       exposure:
         include: '*'    # 以Web方式暴露所有监控端点。
@@ -126,6 +132,8 @@ management:
 
     metrics:
       enabled: true
+
+
 
 info:
   appName: sbdemo

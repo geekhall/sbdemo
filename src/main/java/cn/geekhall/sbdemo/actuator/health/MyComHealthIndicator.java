@@ -1,4 +1,4 @@
-package cn.geekhall.sbdemo.health;
+package cn.geekhall.sbdemo.actuator.health;
 
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
@@ -25,7 +25,7 @@ public class MyComHealthIndicator extends AbstractHealthIndicator {
     protected void doHealthCheck(Health.Builder builder) throws Exception {
         Map<String, Object> map = new HashMap<>();
         // mysql check
-        if ( false ) {
+        if ( true ) {
 //            builder.up();
             // or
             builder.status(Status.UP);

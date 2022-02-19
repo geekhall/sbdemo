@@ -126,3 +126,9 @@ management:
 
     metrics:
       enabled: true
+
+info:
+  appName: sbdemo
+  appVersion: 1.0.0
+  mavenProjectName: @project.name@        # 使用@variable@的方式获得maven的pom文件中的信息
+  mavenProjectVersion: @project.version@

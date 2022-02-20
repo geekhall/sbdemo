@@ -1,0 +1,9 @@
+#
+org.springframework.context.ApplicationContextInitializer=\
+  cn.geekhall.geekhallbootdemo.listener.MyApplicationContextInitializer
+
+org.springframework.context.ApplicationListener=\
+  cn.geekhall.geekhallbootdemo.listener.MyApplicationListener
+
+org.springframework.boot.SpringApplicationRunListener=\
+  cn.geekhall.geekhallbootdemo.listener.MySpringApplicationRunListener

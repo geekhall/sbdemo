@@ -586,5 +586,50 @@ geekhall:
 SpringBoot => Spring4
 SpringBoot2 => Spring5
 
-### 启动过程
+### 1. SpringBoot启动过程
 
+* 创建SpringApplication
+  - 保存一些信息
+  - 判定当前应用的类型（ClassUtils.Servlet)
+  - bootstrapper : 初始启动引导器 ： 去spring.factories文件中找（没找到）
+  - 找ApplicationContextInitializer： 初始化器：去spring.factories文件中找ApplicationContextInitializer类型，（找到7个）
+  - 找ApplicationListener： 应用监听器：去spring.factories文件中找ApplicationListener类型，（找到9个）
+  - 去应用栈中找到有main方法的类作为推断出的主程序
+* 运行SpringApplication
+  - StopWatch
+  - 记录应用的启动时间
+  - 创建引导上下文（Context上下文）createBootstrapContext()
+    - 获取到所有之前的Bootstraper挨个执行initialize()来完成对引导启动器上下文环境设置。
+  - 让当前应用进入headless模式。java.awt.headless
+  - 获取所有RunListener（运行监听器）
+    - getSpringFactoriesInstances 去spring.factories找SpringApplicationRunListener
+  - 遍历SpringApplicationRunListener 调用starting方法；
+    - 相当于通知所有Listener项目正在starting。
+  - 保存命令行参数 ； ApplicationArguments
+  - 准备环境： prepareEnvironment();
+    - 返回或者创建基础环境信息对象。StandardServletEnvironment
+    - 配置环境信息对象
+      - 读取所有的配置源的配置属性值
+    - 绑定环境信息
+    - 监听器调用listener.environmentPrepared(); 通知所有监听器当前环境准备完成。
+  - 根据当前项目类型来创建IoC容器（createApplicationContext() )
+    - Servlet => AnnotationConfigServletWebServerApplicationContext
+  - 准备ApplicationContext IoC容器的基本信息：prepareContext()
+    - 保存环境信息
+    - IoC容器的后置处理流程
+    - 应用初始化器：applyInitializers
+      - 遍历所有的ApplicationContextInitializer，调用initialize，来对IoC容器进行初始化扩展功能。
+      - 遍历所有的listener调用contextPrepared。EventPublishRunListener；通知所有的监听器contextPrepared
+    - 所有的监听器调用contextLoaded。通知所有的监听器contextLoaded
+  - 刷新IoC容器。refreshContext
+    - 创建容器中的所有组件
+  - 容器刷新完成后的工作 afterRefresh
+  - 所有监听器调用listeners.started(context); 通知所有的监听器started
+  - 
+* 
+
+### 2. Application Events and Listeners
+
+* ApplicationContextInitializer
+* ApplicationListener
+* SpringApplicationRunListener
